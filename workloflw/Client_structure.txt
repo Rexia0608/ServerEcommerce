@@ -1,0 +1,22 @@
+/client
+├── /public
+│   └── index.html           # Entry point for the frontend app
+│
+├── /src
+│   ├── /assets              # Static files like images, icons, etc.
+│   ├── /components          # Reusable UI components (buttons, forms, etc.)
+│   ├── /contexts            # React Context for global state management (optional)
+│   ├── /hooks               # Custom hooks
+│   ├── /pages               # Components for each page (Home, Profile, etc.)
+│   ├── /services            # API calls (calls to backend)
+│   ├── /store               # Redux or Zustand or any other state management
+│   ├── /styles              # Global styles (CSS, SCSS, styled-components)
+│   ├── /utils               # Utility functions (helpers, formatters, etc.)
+│   ├── /views               # Views representing various routes/pages
+│   ├── App.js               # Main app file
+│   ├── index.js             # React entry point (DOM rendering)
+│   └── routes.js            # Frontend routing (React Router)
+│
+├── .env                     # Environment variables (API URL, etc.)
+├── package.json             # Project settings and dependencies
+└── README.md                # Project information

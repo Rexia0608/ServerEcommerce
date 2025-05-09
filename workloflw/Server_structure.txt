@@ -1,0 +1,39 @@
+/server
+│
+├── /config
+│   └── db.js            # PostgreSQL database connection
+│   └── jwt.js           # JWT token utilities (sign, verify)
+│
+├── /controllers
+│   ├── authController.js    # Login, Register
+│   ├── userController.js    # User profile, user management
+│   ├── productController.js # Products (CRUD)
+│   ├── cartController.js    # Cart operations
+│   └── orderController.js   # Orders
+│
+├── /middlewares
+│   ├── authMiddleware.js    # Protect routes (JWT verification)
+│   └── roleMiddleware.js    # Check user role (admin, customer)
+│
+├── /models
+│   ├── UserAccount.js
+│   ├── UserDetails.js
+│   ├── Product.js
+│   ├── Cart.js
+│   └── Order.js
+│
+├── /routes
+│   ├── authRoutes.js
+│   ├── userRoutes.js
+│   ├── productRoutes.js
+│   ├── cartRoutes.js
+│   └── orderRoutes.js
+│
+├── /utils
+│   └── validators.js        # Input validation (optional)
+│   └── errorHandler.js      # Global error handling (optional)
+│
+├── .env                      # Environment variables (DB URL, JWT Secret)
+├── app.js                    # Main Express app (import routes, middlewares)
+├── package.json              # Project settings and scripts
+└── README.md     

@@ -1,0 +1,136 @@
+Backend API Development Workflow
+
+Phase 1: Setup & Initialization 3days#
+1. Setup Project Environment:
+   - Initialize Node.js project.
+   - Install required dependencies: express, pg, bcryptjs, jsonwebtoken, cors, dotenv.
+   - Configure .env for PostgreSQL connection and JWT secret.
+
+2. Database Setup:
+   - Design the database schema and create tables (users_accounts, users_details, product_list, order_list, order_items, cart_list).
+   - Ensure PostgreSQL is running and connect your Node.js backend to the database.
+
+3. API Server Setup:
+   - Create the Express app and basic routes.
+   - Setup middleware for CORS and JSON parsing.
+
+Phase 2: Authentication System
+1. User Registration:
+   - Create a POST /api/auth/register route for registering users.
+   - Hash passwords using bcryptjs and insert new user into users_accounts.
+   - Return success message after successful registration.
+
+2. User Login & JWT Token Generation:
+   - Create a POST /api/auth/login route for user login.
+   - Validate user credentials and generate a JWT token (jsonwebtoken).
+   - Return JWT token for the frontend to store and use for subsequent API requests.
+
+3. Authorization Middleware:
+   - Create middleware (authenticateToken) to protect routes and verify JWT tokens.
+
+Phase 3: User Management (Admin/Customer Roles)
+1. Admin Access Control:
+   - Add middleware to check for usertype (admin/customer).
+   - Ensure only admins can create/edit products, view all users, or manage orders.
+
+2. User Profile:
+   - Create GET /api/users/:id route to fetch user details (like firstname, lastname, wallet).
+   - Admins can access other users' profiles, regular users can only access their own.
+
+3. Password Reset (Optional):
+   - Create a POST /api/auth/reset-password route to handle password reset requests via email (if necessary).
+
+Phase 4: Product Management (Admin Only)
+1. Add New Product:
+   - Create a POST /api/products route to add new products to the product_list table (accessible to admins).
+   - Ensure products contain necessary details like itemname, price, category, description, inventory.
+
+2. Get Product List:
+   - Create a GET /api/products route to fetch a list of products (paginated, if necessary).
+
+3. Update Product:
+   - Create a PUT /api/products/:id route to update product details (admin only).
+   - Ensure the route allows updating the product name, price, inventory, etc.
+
+4. Delete Product:
+   - Create a DELETE /api/products/:id route to delete a product (admin only).
+
+Phase 5: Shopping Cart Management
+1. Add Product to Cart:
+   - Create a POST /api/cart route for users to add products to their cart.
+   - Store user_id, product_id, and quantity in the cart_list.
+
+2. Get Cart Items:
+   - Create a GET /api/cart/:userId route to retrieve a user's cart items.
+   - Return the cart data with product information.
+
+3. Update Cart:
+   - Create a PUT /api/cart/:userId/:productId route to update the quantity of a product in the cart.
+
+4. Remove Product from Cart:
+   - Create a DELETE /api/cart/:userId/:productId route to remove a product from the cart.
+
+Phase 6: Order Management
+1. Place an Order:
+   - Create a POST /api/orders route where a user places an order from their cart.
+   - Insert the order into order_list and the order items into order_items table.
+
+2. Get User Orders:
+   - Create a GET /api/orders/:userId route to get a list of orders placed by a user.
+
+3. Update Order Status:
+   - Create a PUT /api/orders/:orderId route to update the order status (like payment and delivery status).
+   - Only admins should be able to update certain order statuses (like completed or shipped).
+
+4. View Specific Order:
+   - Create a GET /api/orders/:orderId route to view details about a specific order (admin and user should be able to see their own).
+
+Phase 7: Admin Dashboard (Optional)
+1. Admin View All Products:
+   - Create a GET /api/admin/products route to view all products (admin only).
+
+2. Admin View All Orders:
+   - Create a GET /api/admin/orders route to view all orders placed by users (admin only).
+
+3. Admin View All Users:
+   - Create a GET /api/admin/users route to list all registered users (admin only).
+
+Phase 8: Miscellaneous Features
+1. Order History:
+   - Create endpoints for tracking order history, filtering by status, date range, etc.
+
+2. User Notifications:
+   - Implement a basic notification system (if needed) to alert users about order status changes.
+
+Summary of API Endpoints:
+- Authentication:
+  - POST /api/auth/register
+  - POST /api/auth/login
+  - POST /api/auth/reset-password
+
+- User Management:
+  - GET /api/users/:id
+
+- Product Management (Admin):
+  - POST /api/products
+  - GET /api/products
+  - PUT /api/products/:id
+  - DELETE /api/products/:id
+
+- Cart Management:
+  - POST /api/cart
+  - GET /api/cart/:userId
+  - PUT /api/cart/:userId/:productId
+  - DELETE /api/cart/:userId/:productId
+
+- Order Management:
+  - POST /api/orders
+  - GET /api/orders/:userId
+  - GET /api/orders/:orderId
+  - PUT /api/orders/:orderId
+
+- Admin Routes (for admins only):
+  - GET /api/admin/products
+  - GET /api/admin/orders
+  - GET /api/admin/users
+"""
